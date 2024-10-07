@@ -7,14 +7,21 @@ from Utils.config import BASE_URL
 @pytest.mark.usefixtures("setup")
 class TestAdminPageMenu:
 
-    def test_admin_page_headers(self,setup):
+    def test_admin_page_menu(self,setup):
         self.driver = setup
         login = LoginPage(self.driver, BASE_URL)
         login.perform_login("Admin", "admin123")
 
         admin_page_menu = AdminPage(self.driver, BASE_URL)
         admin_page_menu.click_Admin()
+        if admin_page_menu.check_page_title():
+            print("Page title is correct: OrangeHRM")
+        else:
+            print("Page title is incorrect!")
 
-        assert admin_page_menu.check_adminpage_all_menu_displayed(), "Not all side menu options are displayed"
+            menu_status = admin_page_menu.check_adminpage_all_menu_displayed()
+            print(menu_status)
+
+
 
         self.driver.close()

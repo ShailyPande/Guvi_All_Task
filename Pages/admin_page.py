@@ -37,7 +37,8 @@ class AdminPage(BasePage):
 
 
     def click_Admin(self):
-        WebDriverWait(self.driver,20).until(EC.element_to_be_clickable(self.Admin_locator)).click()
+        self.Admin = WebDriverWait(self.driver,20).until(EC.presence_of_element_located(self.Admin_locator))
+        self.Admin.click()
 
 
     def check_page_title(self):
@@ -55,7 +56,7 @@ class AdminPage(BasePage):
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.Corporate_Banding_locator))
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.Configuration_locator))
 
-            return True
+            return  "All admin page headers are displayed."
 
         except TimeoutException:
             return False
@@ -78,7 +79,7 @@ class AdminPage(BasePage):
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.Claim_element))
             WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.Buzz_element))
 
-            return True
+            return "All admin page menu are displayed."
 
         except TimeoutException:
             return False

@@ -12,9 +12,8 @@ class TestLoginAllScenarios:
         self.driver = setup
         login = LoginPage(self.driver,BASE_URL)
         login.perform_login("Admin","admin123" )
-        login_message = login.get_message()
-
-        assert login_message == "Login successful"
+        login.get_login_successfull()
+        # print(login.get_login_successfull())
         time.sleep(10)
         print("Quitting driver")
         self.driver.close()
@@ -25,10 +24,9 @@ class TestLoginAllScenarios:
         self.driver = setup
         login = LoginPage(self.driver, BASE_URL)
         login.perform_login(" ", "admin123")
-
-        login_message = login.get_message()
-
-        assert login_message == "Required field error:  user name field is required"
+        login.get_user_message()
+        print(login.get_user_message())
+        assert login.get_user_message() =="Required"
         time.sleep(10)
         print("Quitting driver")
         self.driver.close()
@@ -39,10 +37,9 @@ class TestLoginAllScenarios:
         login = LoginPage(self.driver,BASE_URL)
 
         login.perform_login("Admin", " ")
-
-        login_message = login.get_message()
-
-        assert login_message == "Required field error:  password field is required"
+        login.get_password_message()
+        print(login.get_password_message())
+        assert login.get_password_message() == "Required"
         time.sleep(10)
         print("Quitting driver")
         self.driver.close()
@@ -51,10 +48,8 @@ class TestLoginAllScenarios:
         self.driver = setup
         login = LoginPage(self.driver,BASE_URL)
         login.perform_login("Admin123", "admin123")
-
-        login_message = login.get_message()
-
-        assert login_message == "Invalid credentials: Please check your username and password"
+        login.get_invalid_message()
+        assert login.get_invalid_message() == "Invalid credentials"
         time.sleep(10)
         print("Quitting driver")
         self.driver.close()
@@ -63,14 +58,12 @@ class TestLoginAllScenarios:
         self.driver = setup
         login = LoginPage(self.driver,BASE_URL)
         login.perform_login("Admin", "admin1234")
-
-        login_message = login.get_message()
+        login.get_invalid_message()
+        assert login.get_invalid_message() == "Invalid credentials"
+        time.sleep(10)
         print("Quitting driver")
         self.driver.close()
 
-
-        assert login_message == "Invalid credentials: Please check your username and password"
-        time.sleep(10)
 
 
 

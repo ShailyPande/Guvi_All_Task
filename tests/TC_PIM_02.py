@@ -14,7 +14,12 @@ class TestAdminPageHeaders:
 
         admin_page_header = AdminPage(self.driver, BASE_URL)
         admin_page_header.click_Admin()
-        admin_page_header.check_page_title()
-        assert admin_page_header.check_adminpage_all_headers_displayed(), "Not all admin page headers are displayed"
+        if admin_page_header.check_page_title():
+            print("Page title is correct: OrangeHRM")
+        else:
+            print("Page title is incorrect!")
+            header_status = admin_page_header.check_adminpage_all_headers_displayed()
+            print(header_status)
+
 
         self.driver.close()

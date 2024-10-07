@@ -13,5 +13,4 @@ class TestForgotPasswordFunctionality:
         forgot_password.perform_forgot_password("Admin")
 
         forgot_password.reset_password_successfull()
-
         self.driver.close()
